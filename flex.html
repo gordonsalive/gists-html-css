@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<!-- <body style="width: 100%"> -->
+<body>
+    <div style="display: block; border: 2px solid grey">
+        I'm going to create a page with a page with a card on the left quarter
+        and a card in the right 3 quarters,
+        Then in the right hand card I want a narrow head and footer, and inbetween them
+        I want a block on the left taking up 1 eighth of the space and an image on the righthand side
+        And this image should be larger than the block it is displayed in, so I should have scroll bars
+        <br>
+        In this iteration I want to use flex for this.  This is a useful link: 
+        https://css-tricks.com/understanding-flex-grow-flex-shrink-and-flex-basis/ 
+    </div>
+    <!-- <div id="mainContainer" style="display: block; border: 2px solid grey; width: 100%"> -->
+    <div id="mainContainer" style="display: block; border: 2px solid grey">
+        <div style="display: block; border: 2px solid greenyellow">
+            flex has a shorthand, e.g. flex: 1 0 auto, which means (max: how do I want to grow)
+            (min: how do I want to shrink)(ideal size: how do I want it to behave)
+            <br> 1, 2, 3.. means what proportion should it grow or shrink to?
+            0 means don't just don't, e.g. don't shrink acording to content
+            <br>
+            To be clear, grow means add space to spread padding as I've asked in the proportions I've asked, 
+            if the total content is smaller than full row width.
+            <br> shrink means reduce width of elements <em>if we can</em> (like simple text which can wrap, but not an image, say), 
+            again taking space away in the proportions asked for in order to reach the row width, if we can.
+        </div>
+        <!-- <div style="display: flex; border: 2px solid greenyellow; width: 100%"> -->
+        <div style="display: flex; border: 2px solid greenyellow">
+            <!-- <div id="step1" style="flex: 1 1 auto; border: 2px solid green; width: 25%"> -->
+            <div id="step1" style="flex: 1 1 auto; border: 2px solid green">
+                Step 1: card on the left
+            </div>
+            <!-- <div id="step2" style="flex: 3 3 auto; border: 2px solid green; width: 75%"> -->
+            <div id="step2" style="flex: 3 3 auto; border: 2px solid green">
+                Step 2: card on the right
+                <div id="header" style="display: block; border: 1px solid grey">
+                    header
+                    <br> overflow won't work, because I'm not setting the height and width to something specific
+                    <br> but then, since one element has a fixed width, flex adds padding to other element, unless I say don't grow.
+                </div>
+                <!-- <div id="body" style="display: flex; border: 1px solid grey; width: 100%"> -->
+                <div id="body" style="display: flex; border: 1px solid grey">
+                    <!-- <div id="leftPannel" style="flex: 1 1 auto; width: 12%"> -->
+                    <div id="leftPannel" style="flex: 1 1 auto">
+                        left pannel
+                    </div>
+                    <!-- <div id="scrollingWindow" style="overflow: auto; flex: 7 7 auto; width: 88%"> -->
+                    <div id="scrollingWindow" style="overflow: auto; flex: 7 7 auto; width: 10vw">
+                    <!-- <div id="scrollingWindow" style="overflow: auto; flex: 7 7 auto; width: 600px"> -->
+                    <!-- <div id="scrollingWindow" style="overflow: auto; flex: 7 1 auto"> -->
+                        <div id="innerWindow" style="">
+                            Flex won't initialise the width to anything, it needs to come from the content and then flex will adjust it as directed, 
+                            if it can - <em>which for an image it cannot</em>.
+                            <br>So, my scrolling box must provide its own width to start off with (otherwise it gets it from its content, ultimately the image).
+                            <br><br>Solution 1, set the width as a % of view width (vw). set it very small and let flex grow the width as required
+                            <br><br>Soltuion 2, set the width to 100% (of parent, but that must have width - or 100% ... and so on to top, else it gives up and uses content again)
+                            However, this means using explicit % widths instead of flex biases, compeletely overriding flex and making the CSS messier.
+                            <br><br>(Solution 3, not tried yet, is use grid instead of flex)
+                            <img src="image.png" alt="Retro feelings board" style="width: 1200px; height: 600px;">
+                            <!-- <img src="image.png" alt="Retro feelings board" style="object-fit: cover;"> -->
+                        </div>
+                    </div>
+                </div>
+                <div id="footer" style="display: block; border: 1px solid grey">
+                    footer:  I favour option 1, if it work in diff browsers. (less messy.)
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
